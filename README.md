@@ -157,3 +157,4 @@
 - [Swag Declarative Comments Formats](https://github.com/swaggo/swag#declarative-comments-format) for API documentation.
 - [GoMock](https://github.com/golang/mock) for Mock Server
 - [Viper README.md](https://github.com/spf13/viper/blob/master/README.md) for Config
+- [Golangci-lint README.md](https://github.com/golangci/golangci-lint/blob/master/README.md) for linter

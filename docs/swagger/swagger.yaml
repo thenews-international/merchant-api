@@ -1,0 +1,470 @@
+basePath: /api/v1
+definitions:
+  httputil.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+  model.LoginForm:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  model.Merchant:
+    properties:
+      businessName:
+        type: string
+      createdAt:
+        type: string
+      description:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      password:
+        type: string
+      status:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  model.MerchantDto:
+    properties:
+      businessName:
+        type: string
+      description:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      status:
+        type: string
+    type: object
+  model.RegistrationForm:
+    properties:
+      businessName:
+        type: string
+      confirmPassword:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  model.SrvError:
+    properties:
+      error:
+        type: string
+    type: object
+  model.TeamMemberCreateForm:
+    properties:
+      email:
+        type: string
+      familyName:
+        type: string
+      givenName:
+        type: string
+      isOwner:
+        type: boolean
+    type: object
+  model.TeamMemberDto:
+    properties:
+      email:
+        type: string
+      familyName:
+        type: string
+      givenName:
+        type: string
+      id:
+        type: string
+      isOwner:
+        type: boolean
+      merchantID:
+        type: string
+      status:
+        type: string
+    type: object
+  model.TeamMemberUpdateForm:
+    properties:
+      familyName:
+        type: string
+      givenName:
+        type: string
+      isOwner:
+        type: boolean
+    type: object
+  validator.ErrResponse:
+    properties:
+      errors:
+        items:
+          type: string
+        type: array
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is the API documentation of the Merchant service
+  license:
+    name: MIT
+  title: Merchant service API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      description: Login
+      parameters:
+      - description: Login merchant
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.LoginForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.SrvError'
+      summary: Login
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register new merchant
+      parameters:
+      - description: Register merchant
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.RegistrationForm'
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: string
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/model.SrvError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/validator.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.SrvError'
+      summary: Register new merchant
+      tags:
+      - auth
+  /merchants:
+    get:
+      description: get merchant list
+      parameters:
+      - description: name search by q
+        in: query
+        name: q
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/model.MerchantDto'
+              type: array
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: List merchant
+  /merchants/{id}:
+    delete:
+      description: delete a merchant
+      parameters:
+      - description: Merchant ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ok
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Delete merchant
+    get:
+      description: get a merchant
+      parameters:
+      - description: Merchant ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/model.Merchant'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Read merchant
+    put:
+      description: update merchant
+      parameters:
+      - description: Merchant ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: accepted
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Update merchant
+  /team-members:
+    get:
+      description: get team members list
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/model.TeamMemberDto'
+              type: array
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: List team members
+    post:
+      consumes:
+      - application/json
+      description: add a member to merchant team
+      parameters:
+      - description: Create a team member
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.TeamMemberCreateForm'
+      responses:
+        "200":
+          description: ok
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Create Team Member
+  /team-members/{id}:
+    delete:
+      description: remove a member
+      parameters:
+      - description: Team Member ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ok
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Remove a team member from merchant
+    get:
+      description: get a member
+      parameters:
+      - description: Team Member ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/model.TeamMemberDto'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Read team member
+    put:
+      description: update member
+      parameters:
+      - description: Update a team member
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.TeamMemberUpdateForm'
+      - description: Team Member ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: accepted
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Update team member
+swagger: "2.0"
