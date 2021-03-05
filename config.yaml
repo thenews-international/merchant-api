@@ -5,7 +5,7 @@ database:
   name: merchant
   username: admin
   password: pass
-  host: db # change "0.0.0.0" or "db" for docker
+  host: localhost # change "0.0.0.0" or "db" for docker
   port: 3306
 
 debug: true

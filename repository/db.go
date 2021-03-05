@@ -12,7 +12,7 @@ type repo struct {
 
 func New(db *gorm.DB) Repository {
 	return &repo{
-		db,
+		DB: db,
 	}
 }
 

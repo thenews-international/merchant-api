@@ -52,6 +52,7 @@
 |   |   |-- common.go
 |   |   |-- merchant.go
 |   |   |-- server.go
+|   |   |-- suite_test.go
 |   |   `-- team_member.go
 |   `-- router
 |       |-- middleware
@@ -69,7 +70,10 @@
 |-- deployment
 |   `-- docker
 |       |-- Dockerfile
-|       `-- docker-compose.yml
+|       `-- bin
+|           |-- init.sh
+|           `-- wait-for-mysql.sh
+|-- docker-compose.yml
 |-- docs
 |   `-- swagger
 |       |-- docs.go
@@ -86,16 +90,18 @@
 |   |-- jwt.go
 |   |-- merchant.go
 |   |-- merchant_form.go
-|   |-- team-member.go
+|   |-- merchant_test.go
+|   |-- team_member.go
 |   `-- team_member_form.go
 |-- mysql
-|   `-- mysql.go
+|   |-- mysql.go
+|   `-- mysql_test.go
 |-- repository
 |   |-- db.go
 |   |-- merchant.go
 |   |-- merchant_test.go
 |   |-- suite_test.go
-|   `-- team-member.go
+|   `-- team_member.go
 |-- server
 |   |-- driver
 |   |   `-- driver.go
@@ -147,7 +153,7 @@
     ```
     mockgen -source=./repository/db.go -destination=./mock/mock_repository/mock_db.go
     ```
-  
+
 ## References
 - [Docker: Get started guild](https://docs.docker.com/get-started/)
 - [GORM Documentation](http://gorm.io/docs/) for ORM functionality.

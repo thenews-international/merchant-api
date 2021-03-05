@@ -1,6 +1,8 @@
 package mysql
 
 import (
+	"fmt"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -10,6 +12,9 @@ import (
 
 func New(conf *config.DatabaseConfig, isDebugModeOn bool) (*gorm.DB, error) {
 	dsn := conf.ToDsnString()
+
+	fmt.Println("asdfasdfasdfasdfasdfasdfasdfsadfasdf")
+	fmt.Println(dsn)
 
 	var logLevel logger.LogLevel
 	if isDebugModeOn {

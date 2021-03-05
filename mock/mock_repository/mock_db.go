@@ -5,35 +5,92 @@
 package mock_repository
 
 import (
-	gomock "github.com/golang/mock/gomock"
 	model "merchant/model"
 	reflect "reflect"
+
+	gomock "github.com/golang/mock/gomock"
 )
 
-// MockRepository is a mock of Repository interface
+// MockRepository is a mock of Repository interface.
 type MockRepository struct {
 	ctrl     *gomock.Controller
 	recorder *MockRepositoryMockRecorder
 }
 
-// MockRepositoryMockRecorder is the mock recorder for MockRepository
+// MockRepositoryMockRecorder is the mock recorder for MockRepository.
 type MockRepositoryMockRecorder struct {
 	mock *MockRepository
 }
 
-// NewMockRepository creates a new mock instance
+// NewMockRepository creates a new mock instance.
 func NewMockRepository(ctrl *gomock.Controller) *MockRepository {
 	mock := &MockRepository{ctrl: ctrl}
 	mock.recorder = &MockRepositoryMockRecorder{mock}
 	return mock
 }
 
-// EXPECT returns an object that allows the caller to indicate expected use
+// EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockRepository) EXPECT() *MockRepositoryMockRecorder {
 	return m.recorder
 }
 
-// ListMerchants mocks base method
+// CreateMerchant mocks base method.
+func (m *MockRepository) CreateMerchant(u *model.Merchant) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateMerchant", u)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CreateMerchant indicates an expected call of CreateMerchant.
+func (mr *MockRepositoryMockRecorder) CreateMerchant(u interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateMerchant", reflect.TypeOf((*MockRepository)(nil).CreateMerchant), u)
+}
+
+// CreateTeamMember mocks base method.
+func (m *MockRepository) CreateTeamMember(t *model.TeamMember) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateTeamMember", t)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CreateTeamMember indicates an expected call of CreateTeamMember.
+func (mr *MockRepositoryMockRecorder) CreateTeamMember(t interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTeamMember", reflect.TypeOf((*MockRepository)(nil).CreateTeamMember), t)
+}
+
+// DeleteMerchant mocks base method.
+func (m *MockRepository) DeleteMerchant(id string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteMerchant", id)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteMerchant indicates an expected call of DeleteMerchant.
+func (mr *MockRepositoryMockRecorder) DeleteMerchant(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteMerchant", reflect.TypeOf((*MockRepository)(nil).DeleteMerchant), id)
+}
+
+// DeleteTeamMember mocks base method.
+func (m *MockRepository) DeleteTeamMember(id string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteTeamMember", id)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteTeamMember indicates an expected call of DeleteTeamMember.
+func (mr *MockRepositoryMockRecorder) DeleteTeamMember(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTeamMember", reflect.TypeOf((*MockRepository)(nil).DeleteTeamMember), id)
+}
+
+// ListMerchants mocks base method.
 func (m *MockRepository) ListMerchants() (model.Merchants, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListMerchants")
@@ -42,85 +99,13 @@ func (m *MockRepository) ListMerchants() (model.Merchants, error) {
 	return ret0, ret1
 }
 
-// ListMerchants indicates an expected call of ListMerchants
+// ListMerchants indicates an expected call of ListMerchants.
 func (mr *MockRepositoryMockRecorder) ListMerchants() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListMerchants", reflect.TypeOf((*MockRepository)(nil).ListMerchants))
 }
 
-// CreateMerchant mocks base method
-func (m *MockRepository) CreateMerchant(u *model.Merchant) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateMerchant", u)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CreateMerchant indicates an expected call of CreateMerchant
-func (mr *MockRepositoryMockRecorder) CreateMerchant(u interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateMerchant", reflect.TypeOf((*MockRepository)(nil).CreateMerchant), u)
-}
-
-// ReadMerchantById mocks base method
-func (m *MockRepository) ReadMerchantById(id string) (*model.Merchant, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ReadMerchantById", id)
-	ret0, _ := ret[0].(*model.Merchant)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ReadMerchantById indicates an expected call of ReadMerchantById
-func (mr *MockRepositoryMockRecorder) ReadMerchantById(id interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadMerchantById", reflect.TypeOf((*MockRepository)(nil).ReadMerchantById), id)
-}
-
-// ReadMerchantByEmail mocks base method
-func (m *MockRepository) ReadMerchantByEmail(email string) (*model.Merchant, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ReadMerchantByEmail", email)
-	ret0, _ := ret[0].(*model.Merchant)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// ReadMerchantByEmail indicates an expected call of ReadMerchantByEmail
-func (mr *MockRepositoryMockRecorder) ReadMerchantByEmail(email interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadMerchantByEmail", reflect.TypeOf((*MockRepository)(nil).ReadMerchantByEmail), email)
-}
-
-// UpdateMerchantDescriptionById mocks base method
-func (m *MockRepository) UpdateMerchantDescriptionById(id, d string) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateMerchantDescriptionById", id, d)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// UpdateMerchantDescriptionById indicates an expected call of UpdateMerchantDescriptionById
-func (mr *MockRepositoryMockRecorder) UpdateMerchantDescriptionById(id, d interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMerchantDescriptionById", reflect.TypeOf((*MockRepository)(nil).UpdateMerchantDescriptionById), id, d)
-}
-
-// DeleteMerchant mocks base method
-func (m *MockRepository) DeleteMerchant(id string) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DeleteMerchant", id)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// DeleteMerchant indicates an expected call of DeleteMerchant
-func (mr *MockRepositoryMockRecorder) DeleteMerchant(id interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteMerchant", reflect.TypeOf((*MockRepository)(nil).DeleteMerchant), id)
-}
-
-// ListTeamMembersByMerchantId mocks base method
+// ListTeamMembersByMerchantId mocks base method.
 func (m *MockRepository) ListTeamMembersByMerchantId(merchantId string) (model.TeamMembers, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListTeamMembersByMerchantId", merchantId)
@@ -129,42 +114,43 @@ func (m *MockRepository) ListTeamMembersByMerchantId(merchantId string) (model.T
 	return ret0, ret1
 }
 
-// ListTeamMembersByMerchantId indicates an expected call of ListTeamMembersByMerchantId
+// ListTeamMembersByMerchantId indicates an expected call of ListTeamMembersByMerchantId.
 func (mr *MockRepositoryMockRecorder) ListTeamMembersByMerchantId(merchantId interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTeamMembersByMerchantId", reflect.TypeOf((*MockRepository)(nil).ListTeamMembersByMerchantId), merchantId)
 }
 
-// CreateTeamMember mocks base method
-func (m *MockRepository) CreateTeamMember(t *model.TeamMember) error {
+// ReadMerchantByEmail mocks base method.
+func (m *MockRepository) ReadMerchantByEmail(email string) (*model.Merchant, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateTeamMember", t)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// CreateTeamMember indicates an expected call of CreateTeamMember
-func (mr *MockRepositoryMockRecorder) CreateTeamMember(t interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTeamMember", reflect.TypeOf((*MockRepository)(nil).CreateTeamMember), t)
-}
-
-// ReadTeamMemberById mocks base method
-func (m *MockRepository) ReadTeamMemberById(id string) (*model.TeamMember, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ReadTeamMemberById", id)
-	ret0, _ := ret[0].(*model.TeamMember)
+	ret := m.ctrl.Call(m, "ReadMerchantByEmail", email)
+	ret0, _ := ret[0].(*model.Merchant)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// ReadTeamMemberById indicates an expected call of ReadTeamMemberById
-func (mr *MockRepositoryMockRecorder) ReadTeamMemberById(id interface{}) *gomock.Call {
+// ReadMerchantByEmail indicates an expected call of ReadMerchantByEmail.
+func (mr *MockRepositoryMockRecorder) ReadMerchantByEmail(email interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadTeamMemberById", reflect.TypeOf((*MockRepository)(nil).ReadTeamMemberById), id)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadMerchantByEmail", reflect.TypeOf((*MockRepository)(nil).ReadMerchantByEmail), email)
 }
 
-// ReadTeamMemberByEmail mocks base method
+// ReadMerchantById mocks base method.
+func (m *MockRepository) ReadMerchantById(id string) (*model.Merchant, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ReadMerchantById", id)
+	ret0, _ := ret[0].(*model.Merchant)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ReadMerchantById indicates an expected call of ReadMerchantById.
+func (mr *MockRepositoryMockRecorder) ReadMerchantById(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadMerchantById", reflect.TypeOf((*MockRepository)(nil).ReadMerchantById), id)
+}
+
+// ReadTeamMemberByEmail mocks base method.
 func (m *MockRepository) ReadTeamMemberByEmail(email string) (*model.TeamMember, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ReadTeamMemberByEmail", email)
@@ -173,13 +159,42 @@ func (m *MockRepository) ReadTeamMemberByEmail(email string) (*model.TeamMember,
 	return ret0, ret1
 }
 
-// ReadTeamMemberByEmail indicates an expected call of ReadTeamMemberByEmail
+// ReadTeamMemberByEmail indicates an expected call of ReadTeamMemberByEmail.
 func (mr *MockRepositoryMockRecorder) ReadTeamMemberByEmail(email interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadTeamMemberByEmail", reflect.TypeOf((*MockRepository)(nil).ReadTeamMemberByEmail), email)
 }
 
-// UpdateTeamMemberById mocks base method
+// ReadTeamMemberById mocks base method.
+func (m *MockRepository) ReadTeamMemberById(id string) (*model.TeamMember, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ReadTeamMemberById", id)
+	ret0, _ := ret[0].(*model.TeamMember)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ReadTeamMemberById indicates an expected call of ReadTeamMemberById.
+func (mr *MockRepositoryMockRecorder) ReadTeamMemberById(id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadTeamMemberById", reflect.TypeOf((*MockRepository)(nil).ReadTeamMemberById), id)
+}
+
+// UpdateMerchantDescriptionById mocks base method.
+func (m *MockRepository) UpdateMerchantDescriptionById(id, d string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateMerchantDescriptionById", id, d)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// UpdateMerchantDescriptionById indicates an expected call of UpdateMerchantDescriptionById.
+func (mr *MockRepositoryMockRecorder) UpdateMerchantDescriptionById(id, d interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateMerchantDescriptionById", reflect.TypeOf((*MockRepository)(nil).UpdateMerchantDescriptionById), id, d)
+}
+
+// UpdateTeamMemberById mocks base method.
 func (m *MockRepository) UpdateTeamMemberById(id string, t *model.TeamMember) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UpdateTeamMemberById", id, t)
@@ -187,22 +202,8 @@ func (m *MockRepository) UpdateTeamMemberById(id string, t *model.TeamMember) er
 	return ret0
 }
 
-// UpdateTeamMemberById indicates an expected call of UpdateTeamMemberById
+// UpdateTeamMemberById indicates an expected call of UpdateTeamMemberById.
 func (mr *MockRepositoryMockRecorder) UpdateTeamMemberById(id, t interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateTeamMemberById", reflect.TypeOf((*MockRepository)(nil).UpdateTeamMemberById), id, t)
-}
-
-// DeleteTeamMember mocks base method
-func (m *MockRepository) DeleteTeamMember(id string) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DeleteTeamMember", id)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// DeleteTeamMember indicates an expected call of DeleteTeamMember
-func (mr *MockRepositoryMockRecorder) DeleteTeamMember(id interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteTeamMember", reflect.TypeOf((*MockRepository)(nil).DeleteTeamMember), id)
 }

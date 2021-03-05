@@ -5,6 +5,7 @@ import (
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 
+	"merchant/mock/mock_repository"
 	"merchant/repository"
 )
 
@@ -35,6 +36,18 @@ func New(
 ) *Server {
 	return &Server{
 		DB:        repository.New(db),
+		Validator: validator,
+		Logger:    logger,
+	}
+}
+
+func NewMockServer(
+	db *mock_repository.MockRepository,
+	validator *validator.Validate,
+	logger *zap.Logger,
+) *Server {
+	return &Server{
+		DB:        db,
 		Validator: validator,
 		Logger:    logger,
 	}
